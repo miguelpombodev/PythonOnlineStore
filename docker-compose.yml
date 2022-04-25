@@ -1,0 +1,35 @@
+version: "3.2"
+
+services:
+  app:
+    build:
+      context: .
+    container_name: store_application
+    environment:
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: store_prod
+      PGDATABASETEST: store_test
+      PGPORT: 5432
+      # Hostname of our Postgres container
+      PGHOST: store_database
+    ports:
+      - "5000:5000"
+    volumes:
+      - type: bind
+        source: .
+        target: /app
+    depends_on:
+      - db
+  db:
+    container_name: store_database
+    image: postgres:11
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /var/lib/postgresql/data/pgdata
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data/:/var/lib/postgresql/data/:z
