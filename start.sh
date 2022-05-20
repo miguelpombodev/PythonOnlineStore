@@ -38,4 +38,4 @@ echo "Applying Migrations to Database"
 flask db upgrade
 
 
-flask run -h 0.0.0.0 -p 5000
+flask run -h 0.0.0.0 -p 3000

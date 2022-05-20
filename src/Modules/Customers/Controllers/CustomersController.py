@@ -1,4 +1,17 @@
+from src.Modules.Customers.Services.CreateCustomerService import CreateCustomerService
+from src.Modules.Customers.Services.ListUserService import ListCustomerService
 class CustomerController:
 
-    def create():
-        return 0
+    def create(self, data: dict):
+        createCustomerService = CreateCustomerService()
+
+        createdCustomer = createCustomerService.execute(data)
+
+        return createdCustomer
+
+    def list(self):
+        listUserService = ListCustomerService()
+
+        customer = listUserService(id)
+
+        return customer

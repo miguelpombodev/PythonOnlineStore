@@ -14,7 +14,7 @@ services:
       # Hostname of our Postgres container
       PGHOST: store_database
     ports:
-      - "5000:5000"
+      - "3000:3000"
     volumes:
       - type: bind
         source: .
