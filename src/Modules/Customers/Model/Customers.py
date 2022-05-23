@@ -27,7 +27,6 @@ class Customer(db.Model):
         self.email = data['email'],
         self.password = generate_password_hash(data['password'])
 
-  
     def create(self):
         try:
             db.session.add(self)
@@ -41,14 +40,22 @@ class Customer(db.Model):
                 password=self.password,
             ), 201
         except Exception as e:
-            return jsonify(message= str(e) + "Internal Error ocurred trying save vessel"), 409
-    
+            return jsonify(message=str(e) + "Internal Error ocurred trying save vessel"), 409
+
     @classmethod
     def getById(cls, id: int):
-        customer = cls.query.filter_by(id==id).first()
-        
+        customer = cls.query.filter_by(id=id).first()
+
         if customer:
             return customer
-        
+
         return None
-        
+
+    @classmethod
+    def getByEmail(cls, email: str):
+        customer = cls.query.filter_by(email=email).first()
+
+        if customer:
+            return customer
+
+        return None
